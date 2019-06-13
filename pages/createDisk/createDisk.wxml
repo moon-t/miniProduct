@@ -1,0 +1,29 @@
+<!--pages/createDisk/createDisk.wxml-->
+
+<view class='container-page'>
+
+	<view class='container-page-label'>所属区域:{{hostInfo.area}}</view>
+	<view class='container-page-label'>服务器名称:{{hostInfo.instance}}</view>
+	<view class="container-page-label">到期时间:{{hostInfo.expiration_time}}</view>
+	<view class="container-page-label">云盘类型:</view>
+	<view class="comment-btn">
+		<button  
+				wx:for="{{diskList}}" 
+				wx:for-item="item" 
+				wx:key="item.index"  
+				bindtap="checkDiskChange" 
+				data-value="{{item.category_id}}" 
+				data-index="{{index}}"  
+				checked="{{item.selected}}"
+				class="container-page-btn {{item.selected ? 'container-page-btn-selected' : ''}}">
+				{{item.category_name}}
+		</button>
+	</view>
+	
+	<view class="container-page-label" wx:if="{{showInput}}">云盘容量:</view>
+	<view>
+		<input auto-focus="{{true}}" wx:if="{{showInput}}" class="container-page-input" type="number" value="1" selection-start="1" selection-end="{{productList[0].max_size}}"/>
+	</view>
+
+	
+</view>

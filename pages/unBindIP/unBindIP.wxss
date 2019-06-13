@@ -1,0 +1,47 @@
+/* pages/unBindIP/unBindIP.wxss */
+.unbind-ip-page{
+	padding: 10px;
+}
+.unbind-ip-host,.unbind-ip-area,.unbind-ip-list{
+	font-size: 28rpx;
+	height: 28px;
+	line-height: 28px;
+}
+.unbind-ip-notice{
+	float: left;
+	width: 100%;
+	border-top: 1px solid #999;
+	margin-top: 10rpx;
+	padding-top:10rpx;
+	color: #efb239;
+	font-size: 28rpx;
+}
+.ip-buy{
+	position: fixed;
+	bottom: 0px;
+	height: 50px;
+	line-height: 50px;
+	width: 100%;
+	text-align: center;
+	font-size: 28rpx;
+	color: #3dcfc1;
+	background: #FFF;
+	border-top:1px solid #f0f2f5; 
+}
+.btn{
+		width: 150rpx;
+		height: 70rpx;
+		float: left;
+		font-size: 24rpx;
+		padding: 0;
+		border: 1px solid #dcdcdc;
+		background: #fff;
+		border-radius: 4px;
+		margin: 15rpx 10rpx 15rpx 0;
+		/* margin-left: 0; */
+		text-align: center;
+}
+.btn-selected{
+		/* border: 1px solid #06a380; */
+		border: 1px solid #3dcfc1;
+}

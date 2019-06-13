@@ -1,0 +1,5 @@
+/* pages/dashboard/dashboard.wxss */
+.dashboard-page{
+	height: 100%;
+	width: 100%;
+}

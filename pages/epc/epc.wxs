@@ -1,0 +1,372 @@
+// epc/epc.wxs
+var hostOptionList = [
+	{
+		value: '',
+		name: '续费',
+		// canOption:this.canRenew(isExp,autoRenew),
+		status: [],
+	}, {
+		value: '',
+		name: '自动续费',
+		// canOption: this.canRenew(autoRenew),
+		status: [],
+	},
+	{
+		value: 'start',
+		name: '开机',
+		canOption: true,
+		status: ["0"],
+	},
+	{
+		value: 'power_off',
+		name: '强制关机',
+		canOption: true,
+		status: ["1", "11"],
+	},
+	{
+		value: 'reboot',
+		name: '强制重启',
+		canOption: true,
+		status: ["1", "11"],
+	},
+	{
+		value: '',
+		name: '重装/换装操作系统',
+		status: ["0"]
+	},
+	{
+		value: '',
+		name: '修改名称',
+		status: [],
+	},
+	{
+		value: '',
+		name: '绑定IP',
+		status: ["0", "1", "2", "3", "4"],
+	},
+	{
+		value: '',
+		name: '解绑IP',
+		// canOption: this.canUnbindIp(ipList, isExp, canUpdate, sComboId),
+		status: ["0", "1", "2", "3", "4"],
+	},
+	{
+		value: '',
+		name: '购买单机带宽',
+		// canOption: this.canExtensionBandwidth(isInGroup, isExp, canUpdate, sComboId),
+		status: ["0", "1", "2", "3", "4"],
+	},
+	{
+		value: '',
+		name: '加入共享带宽组',
+		// canOption: this.canJoinShareGroup(isInGroup, isExp, ipList),
+		status: ["0", "1", "2", "3", "4"],
+	},
+	{
+		value: '',
+		name: '移除共享带宽组',
+		// canOption: this.canUnbindShareBG(isInGroup, isExp),
+		status: ["0", "1", "2", "3", "4"],
+	},
+	{
+		value: '',
+		name: '新购云盘',
+		// canOption: this.canCreateDataDisk(canUpdate, sComboId, areaId, stor, isExp),
+		status: ["0", "1", "11"],
+	},
+	{
+		value: '',
+		name: '云盘扩容',
+		// canOption: this.canExtensionDisk(canUpdate, sComboId, areaId, isExp),
+		status: ["0"]
+	},
+	{
+		value: '',
+		name: '加入安全组',
+		// canOption: this.canJoinSafeGroup(sGroup, isExp),
+		status: ["0", "1", "2", "3", "4"],
+	},
+	{
+		value: '',
+		name: '移除安全组',
+		// canOption: this.canUnbindSafeGroup(sGroup, isExp),
+		status: ["0", "1", "2", "3", "4"],
+	},
+	{
+		value: '',
+		name: '服务器初始登录账号/密码',
+		status: ["0", "1", "2", "3", "4"],
+	}
+]
+var option = []
+var hostStatusList = [{
+	number: "0",
+	name: "关机",
+	color: "#F5222D",
+}, {
+	number: "1",
+	name: "运行中",
+	color: "#6ac22d",
+}, {
+	number: "2",
+	name: "启动中",
+	color: "#efb239",
+}, {
+	number: "3",
+	name: "重启中",
+	color: "#efb239",
+}, {
+	number: "4",
+	name: "关机中",
+	color: "#efb239",
+}, {
+	number: "5",
+	name: "系统安装中",
+	color: "#efb239",
+}, {
+	number: "6",
+	name: "销毁中",
+	color: "#F5222D",
+}, {
+	number: "7",
+	name: "安装失败",
+	color: "#F5222D",
+}, {
+	number: "8",
+	name: "创建失败",
+	color: "#F5222D",
+}, {
+	number: "9",
+	name: "升配中",
+	color: "#efb239",
+}, {
+	number: "10",
+	name: "系统重装中",
+	color: "#efb239",
+}, {
+	number: "11",
+	name: "已开机，获取状态失败",
+	color: "#efb239",
+}, {
+	number: "12",
+	name: "异常",
+	color: "#F5222D",
+}, {
+	number: "13",
+	name: "未知",
+	color: "#F5222D",
+}]
+/**
+ * @desc 通过主机状态返回可操作列表
+ */
+var getOption = function(hostInfo) {
+	var _option = [];
+	var _hostId = hostInfo._id;
+	var status = hostInfo.status;
+	// for(var i = 0; i < hostOptionList.length; i++){
+	// 	if(hostOptionList[i].status[0]){
+	// 		for(var j = 0;j < hostOptionList[i].status.length; j++){
+	// 			if(hostOptionList[i].status[j] == status){
+	// 				_option.push(hostOptionList[i].name)
+	// 			}
+	// 		}
+	// 	}
+	// }
+
+	switch (status){
+		case '0' : 
+			_option = getOptionListStatus0(hostInfo);
+		break;
+		default:
+		break;
+	}
+	option = _option;
+	return _option;
+}
+
+var getOptionsList = function(hostInfo) {
+	let status = hostInfo.status
+
+
+}
+
+/**
+ * @desc 主机状态为0的操作列表
+ * @param {object} hostInfo 当前主机信息
+ * @return {array} _optionList 
+ */
+
+var getOptionListStatus0 = function (hostInfo) {
+	var _optionList = [{value:'start',name:'开机'}]
+	canBindIP(hostInfo) ? _optionList.push({ value: 'bindIp', name: '绑定IP' }) : _optionList = _optionList
+	canUnbindIP(hostInfo) ? _optionList.push({ value: 'UNBindIp', name: '解绑IP' }) : _optionList = _optionList
+	// canExtensionBandwidth(hostInfo) ? _optionList.push('购买单机带宽') : _optionList = _optionList
+	// canJoinShareGroup(hostInfo) ? _optionList.push('加入共享带宽组') : _optionList = _optionList
+	// canUnbindShareBG(hostInfo) ? _optionList.push('移除共享带宽组') : _optionList = _optionList
+	// canJoinSafeGroup(hostInfo) ? _optionList.push('加入安全组') : _optionList = _optionList
+	// canUnbindSafeGroup(hostInfo) ? _optionList.push('移除安全组') : _optionList = _optionList
+	// _optionList.push('服务器初始登录账号/密码')
+	// console.log(hostOptionList)
+	return _optionList;
+}
+
+/**
+ * @desc 主机状态为1的操作列表
+ */
+var getOptionListStatus1 = function(hostInfo) {
+	
+}
+
+/**
+ * @desc 主机状态为11的操作列表
+ */
+var getOptionListStatus11 = function(hostInfo) {
+
+}
+
+var bindPickerChange = function () {
+	// console.log("bindPickerChange")
+}
+/**
+	 * @desc 判断是否可以进行绑定IP操作
+	 * @param {object} hostInfo | 当前主机信息  status 主机状态 scene_combo_id 应用场景id can_bind_ip_count 可绑定ip数 isExpiration 是否过期 true/false 已过期/未过期
+	 * @returns {boolean} canBind | true/false
+	 */
+var canBindIP = function (hostInfo) {
+	var canBind = false;
+	var constantScenarioCombo = hostInfo['can_update'] === '0' && hostInfo['scene_combo_id'] != null;
+	canBind = !constantScenarioCombo &&
+		!!hostInfo['can_bind_ip_count'] && !hostInfo['isExpiration'];
+	return canBind
+}
+
+/**
+	 * @desc 判断是否可以进行解绑ip操作
+	 * @param {object} hostInfo | 当前主机信息 status 主机状态 scene_combo_id 应用场景id ip 已绑定ip列表 isExpiration 是否过期 true/false 已过期/未过期
+	 * @returns {boolean} canUnbind
+	 */
+var canUnbindIP = function (hostInfo) {
+	var canUnbind = false;
+	var constantScenarioCombo = hostInfo['can_update'] === '0' && hostInfo['scene_combo_id'] != null;
+	canUnbind = !!hostInfo.ip[0] && !hostInfo['isExpiration'] && !constantScenarioCombo;
+	return canUnbind
+}
+
+/**
+	 * @desc 判断是否可以进行购买单机带宽操作
+	 * @param {object} hostInfo 当前主机信息 | status 主机状态 | scene_combo_id 应用场景id | is_in_group 是否在共享带宽组中 true/false 在/不在 | isExpiration 是否过期 true/false 已过期/未过期
+	 * @param {boolean} canExtension
+	 */
+var canExtensionBandwidth = function (hostInfo) {
+	var canExtension = false;
+	var constantScenarioCombo = hostInfo['can_update'] === '0' && hostInfo['scene_combo_id'] != null;
+	canExtension = !hostInfo['is_in_group'] && !hostInfo['isExpiration'] && !constantScenarioCombo;
+	return canExtension
+}
+
+/**
+	 * @desc 判断是否可以加入共享带宽组操作
+	 * @param {object} hostInfo 当前主机信息  | is_in_group 是否在共享带宽组中 true/false 在/不在 | isExpiration true/false 过期/未过期
+	 * @param {boolean} canJoin
+	 * 
+	 */
+var canJoinShareGroup = function (hostInfo) {
+	// console.log("coming")
+	var canJoin = false;
+	canJoin = !hostInfo['is_in_group'] && !!hostInfo.ip[0] && !hostInfo['isExpiration']
+	return canJoin
+}
+
+/**
+ * @desc 判断是否可以移除共享带宽组操作
+ * @param {object} hostInfo | status 主机状态 | is_in_group 是否在共享带宽组中 true/false 在/不在 | isExpiration 			true/false 过期/未过期
+	* @param {boolean} canUnbind
+	* 
+	*/
+var canUnbindShareBG = function (hostInfo) {
+	var canUnbind = false;
+	canUnbind = !!hostInfo['is_in_group'] && !hostInfo['isExpiration'];
+	return canUnbind
+}
+
+
+/**
+ * @desc 判断是否可以加入安全组
+ */
+var canJoinSafeGroup = function (hostInfo) {
+	var canJoin = false;
+	canJoin = !hostInfo['safe_group'][0] && !hostInfo['isExpiration'];
+	return canJoin
+}
+
+
+/**
+ * @desc 判断是否可以移除安全组
+ */
+var canUnbindSafeGroup = function (hostInfo) {
+	var canUnbind = false;
+	canUnbind = !!hostInfo['safe_group'][0] && !hostInfo['isExpiration'];
+	return canUnbind;
+}
+
+
+/**
+ * @desc 获取显示状态名
+ * @param {string} status | 主机状态
+ */
+var getStatusName = function (status) {
+	// hostStatusList
+	var statusName = ''
+	for (var i = 0; i < hostStatusList.length; i++){
+		if(status == hostStatusList[i].number){
+			statusName = hostStatusList[i].name
+		}
+	}
+	return statusName
+}
+
+
+/**
+ * @desc 状态显示颜色
+ * @param {string} status | 主机状态
+ */
+var getStatuscolor = function (status) {
+	var statusColor = ''
+	for (var i = 0; i < hostStatusList.length; i++) {
+		if (status == hostStatusList[i].number) {
+			statusColor = hostStatusList[i].color
+		}
+	}
+	return statusColor
+}
+
+/**
+ * @desc 显示数据盘信息
+ * @param {arrary} storageList | 当前主机信息
+ */
+var getDataDiskInfo = function (storageList) {
+	var dataDiskInfo = '-';
+	var dataDiskList = [];
+	var dataDiskSize = 0;
+	if (storageList && storageList[0]) {
+		for(var i = 0; i < storageList.length; i++){
+			if (!storageList[i]['is_system']){
+				dataDiskList.push(storageList[i])
+			}
+		}
+	}
+	if (dataDiskList[0]) {
+		for(var j = 0; j < dataDiskList.length; j++){
+			dataDiskSize += dataDiskList[j].size;
+		}
+		dataDiskInfo = dataDiskList.length + '块，共'+ dataDiskSize + 'G';  
+		// dataDiskInfo = `${dataDiskList.length}块，共${dataDiskSize}G`;
+	}
+	return dataDiskInfo;
+}
+
+module.exports = {
+	getStatusName: getStatusName,
+	getStatuscolor: getStatuscolor,
+	getDataDiskInfo: getDataDiskInfo,
+};

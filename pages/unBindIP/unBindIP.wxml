@@ -1,0 +1,25 @@
+<!--pages/unBindIP/unBindIP.wxml-->
+<view class='unbind-ip-page'>
+
+	<view class='unbing-ip-area'>所属区域:{{hostInfo.area}}</view>
+	<view class='unbind-ip-host'>服务器名称:{{hostInfo.instance}}</view>
+	<p class="unbind-ip-list">已IP列表:</p>
+	<view class="comment-btn">
+		<button 
+				wx:for="{{ipList}}" 
+				wx:for-item="item" 
+				wx:key="item.index"  
+				bindtap="checkboxChange" 
+				data-value="{{item.ip_id}}" 
+				data-index="{{index}}"  
+				checked="{{item.selected}}"
+				disabled="{{!item.canSelected}}"
+				class="btn {{item.selected ? 'btn-selected' : ''}}">
+				{{item.ip}}
+		</button>
+	</view>
+	<view class='unbind-ip-notice' wx:if="{{notice}}">
+		主机在共享带宽组中，必须至少保留一个IP
+	</view>
+	<view wx:if="{{ipList[0]}}" class='ip-buy' bindtap="comfirUnBindIP">解绑IP</view>				
+</view>

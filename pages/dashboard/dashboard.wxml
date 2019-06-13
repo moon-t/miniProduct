@@ -1,0 +1,6 @@
+<!--dashboard.wxml-->
+<view class='container'>
+	<view class='dashboard-page'>
+	<top-component class='dashboard'></top-component>
+	</view>
+</view>

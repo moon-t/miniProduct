@@ -1,0 +1,62 @@
+<!--pages/epc/epc.wxml-->
+<wxs src="./epc.wxs" module="epc" />
+<view class='epc-container'>
+	<filter-components prop-area-array='{{areaList}}' bind:myget='getDate'></filter-components>
+	 <scroll-view scroll-top="{{scrollTop}}" scroll-y="true" style="height:{{scrollHeight}}px;background:{{scrollBg}}" class="list" bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad">
+	<view class='epc-content'>
+		<view class='epc-item' wx:for="{{epcList}}" wx:key="{{item.index}}">
+			<view class='epc-info'>
+				<text class='epc-font-28'>{{item.machine.name}}</text>
+				<text class='epc-font-24 epc-pad-left-5' style='color: {{epc.getStatuscolor(item.status)}}'>{{epc.getStatusName(item.status)}}</text>
+			</view>
+			<view class='epc-left'>
+				<view class='epc-font-24 epc-color-gray epc-pad-top epc-pad-btm'>
+					ID:{{item.instance}} | {{item.machine['name']}} | {{item.area}}
+				</view>
+				<view class='epc-font-24 epc-color-gray epc-pad-top epc-pad-btm'>
+					公网:{{item.ip[0]['ip']}} | 带宽{{item.bandwidth_list[0]['size'] ? item.bandwidth_list[0]['size'] + 'M' : '-'}}
+				</view>
+				<view class='epc-font-24 epc-color-gray epc-pad-top epc-pad-btm'>
+					系统盘:{{item.stor[0]['size'] ? item.stor[0]['category_name']+ '('+item.stor[0]['size']+'G)' : '-'}} 
+				</view>
+				<view class='epc-font-24 epc-color-gray epc-pad-top epc-pad-btm'>
+					数据盘:{{epc.getDataDiskInfo(item.stor)}}
+					<!-- <view>
+						<view wx:for-items="{{epc.getDataDiskInfo(item.stor)}}" wx:for-item="subItem">
+							{{subItem.is_system ? '' : subItem.category_name}}
+						</view>
+					</view> -->
+				</view>
+				<view class='epc-font-24 epc-color-gray epc-pad-top epc-pad-btm'>
+					到期时间:{{item.expiration_time ? item.expiration_time : '-'}} 
+				</view>
+			</view>
+			
+			<view class='epc-right'>
+				<view class="section">
+				<button class='epc-right-btn' type="default" data-id="{{item._id}}"  data-hostInfo="{{item}}" data-expiration="{{item.isExpiration}}" data-status="{{item.status}}" data-auto="{{item.isAutoRenew}}" bindtap="onOptionHost">操作</button>
+				</view>
+			</view>
+		</view>
+		
+				<!-- 主机操作picker start -->
+				<option-picker isShowPicker="{{!pickerDisable}}" bindsure="sureCallBack" bindcancle="cancleCallBack" scrollType="normal" listData="{{option}}" indicatorStyle="height:35px" sureStyle="color:#23AD25;"
+cancelStyle="color:#888;">
+				</option-picker>
+				<!-- 主机操作picker end -->
+				
+				<!-- 共享带宽组picker start -->
+				<option-picker isShowPicker="{{groupPicker}}" bindsure="joinBGroup" bindcancle="cancleJoinBGroup" scrollType="normal" listData="{{groupPickerList}}" indicatorStyle="height:35px" sureStyle="color:#23AD25;"
+cancelStyle="color:#888;">
+				</option-picker>
+				<!-- 共享带宽组picker end -->
+
+				<!-- 安全组picker start -->
+				<option-picker isShowPicker="{{safeGroupPicker}}" bindsure="joinSafeGroup" bindcancle="cancleJoinSafeGroup" scrollType="normal" listData="{{safeGroupList}}" indicatorStyle="height:35px" sureStyle="color:#23AD25;"
+cancelStyle="color:#888;">
+				</option-picker>
+				<!-- 安全组picker end -->
+	</view>
+ </scroll-view>
+	<view class='epc-buy' bindtap='createEpc'>购买裸金属服务器</view>
+</view>

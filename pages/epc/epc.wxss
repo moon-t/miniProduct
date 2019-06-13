@@ -1,0 +1,75 @@
+/* pages/epc/epc.wxss */
+
+.epc-container{
+	height: 100%;
+}
+.epc-content{
+	height: 100%;
+	width: 100%;
+	background: #f0f2f5;
+	border-top: 1px solid #f0f2f5;
+}
+.epc-buy{
+	position: fixed;
+	bottom: 0px;
+	height: 50px;
+	line-height: 50px;
+	width: 100%;
+	text-align: center;
+	font-size: 28rpx;
+	color: #3dcfc1;
+	background: #FFF;
+	border-top:1px solid #f0f2f5; 
+}
+ 
+.epc-item{
+	width: 100%;
+	float: left;
+	background: #FFF;
+	padding: 10px 15px;
+	border-bottom: 1px solid #f0f2f5;
+}
+
+.epc-info{
+	width: 100%;
+}
+.epc-left{
+	width: calc( 100% - 90px );
+	float: left;
+}
+.epc-right{
+	float: right;
+	margin: 18px 36px 0 0;
+}
+.epc-right-btn{
+	width: 54px;
+	font-size: 26rpx;
+	background: #f0f2f5;
+}
+.epc-font-24{
+	font-size: 24rpx;
+}
+.epc-font-28{
+	font-size: 28rpx;
+}
+.epc-color-gray{   
+	color:#999;
+}
+.epc-pad-top{
+	padding-top: 3px;
+}
+.epc-pad-btm{
+	padding-bottom: 3px;
+}
+.epc-pad-left-5{
+	padding-left: 5px;
+}
+.picker-List{
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 300px;
+	overflow-y: scroll;
+	text-align: center;
+}

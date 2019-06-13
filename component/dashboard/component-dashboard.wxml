@@ -1,0 +1,26 @@
+<!--component/dashboard/component-dashboard.wxml-->
+
+<view class='dashboard-component'>
+	<view class='dashboard-top'>
+		<view class='dash-item'>	
+			<view class='dash-num'>0</view>
+			<view class='dash-text'>监控警报</view>
+		</view>
+		
+		<view class='dash-item'>	
+			<view class='dash-num'>0</view>
+			<view class='dash-text'>急需续费</view>
+		</view>
+		
+		<view class='dash-item'>	
+			<view class='dash-num'>0</view>
+			<view class='dash-text'>工单</view>
+		</view>
+	</view>
+	<view class='dashboard-content'>
+		<view class='content-item' wx:for="{{list}}" wx:key="{{item.index}}" data-pagepath="{{ item.pagePath }}" bindtap="navigateTo">			
+			<view class="{{item.iconName}}"></view>
+			<view class="content-text">{{item.text}}</view>
+		</view>
+	</view>
+</view>       

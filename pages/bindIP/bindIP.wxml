@@ -1,0 +1,53 @@
+<!--pages/bindIP/bindIP.wxml-->
+
+<wxs src="./bindIP.wxs" module="bindIP" /> 
+<view class='bind-ip-page'>
+
+	<view class='bind-ip-area'>所属区域:{{hostInfo.area}}</view>
+	<view class='bind-ip-host'>服务器名称:{{hostInfo.instance}}</view>
+	<p class="bind-ip-list">已绑定IP列表:</p>
+	<p class="bind-ip-notice" wx:if="{{!hostInfo.ip[0]}}">暂无已绑定IP 请绑定IP</p>
+	<view class="comment-btn">
+		<button  
+				wx:for="{{hostInfo.ip}}" 
+				wx:for-item="item" 
+				wx:key="item.index"  
+				data-value="{{item.ip_id}}" 
+				data-index="{{index}}" 
+				class='btn'>
+				{{item.ip}}
+		</button>
+	</view>
+	<p class="bind-ip-list" wx:if="{{showLine}}">带宽列表:</p>
+	<view class="comment-btn">
+		<button 
+				wx:for="{{lineList}}" 
+				wx:for-item="item" 
+				wx:key="item.index"  
+				bindtap="checkLineChange" 
+				data-value="{{item.value}}" 
+				data-index="{{index}}"  
+				checked="{{item.selected}}"
+				class="btn {{item.selected ? 'btn-selected' : ''}}">
+				{{item.title}}
+		</button>
+	</view>
+	<p class="bind-ip-list" wx:if="{{showIp}}">IP列表:</p>
+	<p class="bind-ip-notice" wx:if="{{!ipList[0] && showIp}}">暂无可用IP 请先购买IP</p>
+	<view class="comment-btn">
+		<button  
+				wx:if="{{showIp}}"
+				wx:for="{{ipList}}" 
+				wx:for-item="item" 
+				wx:key="item.index"  
+				bindtap="checkIPChange" 
+				data-value="{{item.value}}" 
+				data-index="{{index}}"  
+				checked="{{item.selected}}"
+				class="btn {{item.selected ? 'btn-selected' : ''}}">
+				{{item.title}}
+		</button>
+	</view>
+	<view wx:if="{{!ipList[0] && showIp}}" class='ip-buy' bindtap="buyIp">购买IP</view>
+	<view wx:if="{{ipList[0] && showIp}}" class='ip-buy' bindtap="comfirBindIP">绑定IP</view>				
+</view>

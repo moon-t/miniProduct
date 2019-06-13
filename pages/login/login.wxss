@@ -1,4 +1,4 @@
-/**index.wxss**/
+/* pages/login/login.wxss */
 .userinfo {
   display: flex;
   flex-direction: column;
@@ -18,8 +18,4 @@
 
 .usermotto {
   margin-top: 200px;
-}
-.dashboard-page{
-	height: 100%;
-	width: 100%;
 }

@@ -1,0 +1,4 @@
+/* pages/createEpc/createEpc.wxss */
+.create-epc{
+	background-color: #000;
+}

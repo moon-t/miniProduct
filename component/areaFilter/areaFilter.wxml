@@ -1,0 +1,11 @@
+<view class='com-selectBox'>
+    <view class='com-sContent' bindtap='selectToggle'>
+        <view class='com-sTxt'>
+				<text>{{nowText}}</text>				
+				<icon class="iconfont iconicon-test"></icon>
+				</view>
+    </view>
+    <view class='com-sList' wx:if="{{areaShow}}">
+        <view wx:for="{{propAreaArray}}" data-index="{{index}}" data-id="{{item.area_id}}" wx:key='' class='com-sItem' bindtap='setText'>{{item.name}}</view>
+    </view>
+</view>

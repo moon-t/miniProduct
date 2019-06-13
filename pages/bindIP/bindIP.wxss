@@ -1,0 +1,46 @@
+/* pages/bindIP/bindIP.wxss */
+.bind-ip-page{
+	padding: 10px;
+}
+.bind-ip-host,.bind-ip-area,.bind-ip-list,.bind-ip-notice{
+	float: left;
+	width: 100%;
+	height: 28px;
+	line-height: 28px;
+	font-size: 28rpx;
+}
+.bind-ip-notice{
+	float: left;
+	width: 100%;
+	text-align: center;
+	color: #999;
+}
+.ip-buy{
+	position: fixed;
+	bottom: 0px;
+	height: 50px;
+	line-height: 50px;
+	width: 100%;
+	text-align: center;
+	font-size: 28rpx;
+	color: #3dcfc1;
+	background: #FFF;
+	border-top:1px solid #f0f2f5; 
+}
+.btn{
+		width: 150rpx;
+		height: 70rpx;
+		float: left;
+		font-size: 24rpx;
+		padding: 0;
+		border: 1px solid #dcdcdc;
+		background: #fff;
+		border-radius: 4px;
+		margin: 15rpx 10rpx 15rpx 0;
+		/* margin-left: 0; */
+		text-align: center;
+}
+.btn-selected{
+		/* border: 1px solid #06a380; */
+		border: 1px solid #3dcfc1;
+}

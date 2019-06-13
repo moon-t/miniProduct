@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+		"filter-components":"/component/areaFilter/areaFilter",
+		"option-picker":"/component/optionPicker/optionPicker"
+	},
+	"navigationBarTitleText": "裸金属服务器"
+}

@@ -1,0 +1,7 @@
+
+var showBuyIpBtn = function (){
+
+}
+module.exports = {
+	showBuyIpBtn: showBuyIpBtn,
+};
